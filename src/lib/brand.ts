@@ -5,6 +5,7 @@ export const BRAND = {
   name: "HEMC",
   fullName: "Hashmi Eastern Medicine Clinic",
   logoUrl: "/assets/brand/logo.webp",
+  markUrl: "/assets/brand/mark.webp", // square emblem for small nav/footer marks
   bannerUrl: "/assets/brand/banner.webp",
 };
 

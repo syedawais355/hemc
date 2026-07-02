@@ -51,7 +51,7 @@ export function Header() {
         <div className="header__bar">
           <Link className="brand" href="/" aria-label="HEMC home">
             <span className="brand__mark brand__mark--logo">
-              <img src={BRAND.logoUrl} alt="HEMC" width={36} height={36} />
+              <img src={BRAND.markUrl} alt="HEMC" width={36} height={36} />
             </span>
             {BRAND.name}
           </Link>

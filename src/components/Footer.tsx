@@ -31,7 +31,7 @@ export function Footer() {
             <div className="footer__about">
               <Link className="brand" href="/">
                 <span className="brand__mark brand__mark--logo">
-                  <img src={BRAND.logoUrl} alt="HEMC" width={36} height={36} />
+                  <img src={BRAND.markUrl} alt="HEMC" width={36} height={36} />
                 </span>
                 {BRAND.name}
               </Link>
