@@ -11,6 +11,7 @@ import {
   PerformanceMonitor,
 } from "@react-three/drei";
 import * as THREE from "three";
+import { clone as cloneSkinned } from "three/examples/jsm/utils/SkeletonUtils.js";
 
 const MODEL = "/models/hemc-bottle.glb";
 useGLTF.preload(MODEL);
@@ -25,7 +26,10 @@ type ProgressRef = MutableRefObject<number>;
 
 function Bottle({ progress, compact }: { progress: ProgressRef; compact: boolean }) {
   const group = useRef<THREE.Group>(null);
-  const { scene, animations } = useGLTF(MODEL);
+  const { scene: source, animations } = useGLTF(MODEL);
+  // Clone per mount (skinning-safe) so client-side nav back/forward always gets a
+  // fresh, correctly-normalised model — the cached GLTF scene must not be reused/mutated.
+  const scene = useMemo(() => cloneSkinned(source), [source]);
   // own mixer so nothing competes with our scroll scrubbing
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   const clipHalf = useRef(1.6);
@@ -65,8 +69,11 @@ function Bottle({ progress, compact }: { progress: ProgressRef; compact: boolean
       }
       mesh.material = phys;
     });
-    // centre on origin + scale so max dimension ≈ 1 unit
-    const box = new THREE.Box3().setFromObject(scene);
+    // centre on origin + scale so max dimension ≈ 1 unit.
+    // Measure the ORIGINAL (its world matrices are valid); a freshly-cloned
+    // scene's matrices aren't updated yet, which gave a wrong fit on nav-back.
+    source.updateMatrixWorld(true);
+    const box = new THREE.Box3().setFromObject(source);
     const size = box.getSize(new THREE.Vector3());
     const center = box.getCenter(new THREE.Vector3());
     const s = 1 / Math.max(size.x, size.y, size.z);
