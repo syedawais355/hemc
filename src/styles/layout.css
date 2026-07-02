@@ -46,8 +46,8 @@
   color: var(--accent-contrast);
   box-shadow: var(--shadow-sm);
 }
-.brand__mark--logo { background: #fff; overflow: hidden; padding: 2px; }
-.brand__mark--logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+.brand__mark--logo { background: #fff; overflow: hidden; padding: 3px; }
+.brand__mark--logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 7px; }
 
 .nav {
   display: flex;
