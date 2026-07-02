@@ -111,9 +111,6 @@ export default function HeroBottle() {
 
   const Copy = (
     <div className="hero3d__copy" ref={copyRef}>
-      <span className="hero3d__eyebrow">
-        <span className="hero3d__pulse" /> Hashmi Eastern Medicine Clinic
-      </span>
       <h1 className="hero3d__title">
         Healing, the<br />
         natural <em>way.</em>
